@@ -4,6 +4,7 @@ import com.lens.gurucourse.recipeproject.recipes.domain.*;
 import com.lens.gurucourse.recipeproject.recipes.repositories.CategoryRepository;
 import com.lens.gurucourse.recipeproject.recipes.repositories.RecipeRepository;
 import com.lens.gurucourse.recipeproject.recipes.repositories.UnitOfMeasureRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.event.ContextRefreshedEvent;
@@ -13,7 +14,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
+@Slf4j
 @Component
 public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEvent>{
     private final RecipeRepository recipeRepository;
@@ -29,10 +30,15 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
+        log.debug("RecipeBootstrap > onApplicationEvent");
+
         recipeRepository.saveAll(getRecipes());
     }
 
     private List<Recipe> getRecipes(){
+
+        log.debug("RecipeBootstrap > getRecipes()");
+
         List<Recipe> recipes = new ArrayList<>(2);
 
         //get UOMs
