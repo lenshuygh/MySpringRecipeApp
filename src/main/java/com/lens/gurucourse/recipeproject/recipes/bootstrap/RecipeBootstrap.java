@@ -120,19 +120,19 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
                  "To extend a limited supply of avocados, add either sour cream or cottage cheese to your guacamole dip. Purists may be horrified, but so what? It tastes great.\n" +
                  "\n" +
                  "For a deviled egg version with guacamole, try our Guacamole Deviled Eggs!");
-
-        guacamoleNotes.setRecipe(guacamoleRecipe);
+        //not needed anymore added to setNotes-method in Recipe-class
+        //guacamoleNotes.setRecipe(guacamoleRecipe);
 
         guacamoleRecipe.setNotes(guacamoleNotes);
 
-        guacamoleRecipe.getIngredients().add(new Ingredient("ripe avocados",new BigDecimal(2),eachUom,guacamoleRecipe));
-        guacamoleRecipe.getIngredients().add(new Ingredient("KosherSalt",new BigDecimal(5),teaSpoonUom,guacamoleRecipe));
-        guacamoleRecipe.getIngredients().add(new Ingredient("Fresh lime juice or lemon juice",new BigDecimal(2),tableSpoonUom,guacamoleRecipe));
-        guacamoleRecipe.getIngredients().add(new Ingredient("minced red onion or thinly sliced green onion",new BigDecimal(2),tableSpoonUom,guacamoleRecipe));
-        guacamoleRecipe.getIngredients().add(new Ingredient("serrang chiles, stems and seeds removed, minced",new BigDecimal(2),eachUom,guacamoleRecipe));
-        guacamoleRecipe.getIngredients().add(new Ingredient("Cilantro",new BigDecimal(2),tableSpoonUom,guacamoleRecipe));
-        guacamoleRecipe.getIngredients().add(new Ingredient("freshly grated black pepper",new BigDecimal(2),dashUom,guacamoleRecipe));
-        guacamoleRecipe.getIngredients().add(new Ingredient("ripe tomato, seeds & pulp removed, chopped",new BigDecimal(5),eachUom,guacamoleRecipe));
+        guacamoleRecipe.addIngredient(new Ingredient("ripe avocados",new BigDecimal(2),eachUom));
+        guacamoleRecipe.addIngredient(new Ingredient("KosherSalt",new BigDecimal(5),teaSpoonUom));
+        guacamoleRecipe.addIngredient(new Ingredient("Fresh lime juice or lemon juice",new BigDecimal(2),tableSpoonUom));
+        guacamoleRecipe.addIngredient(new Ingredient("minced red onion or thinly sliced green onion",new BigDecimal(2),tableSpoonUom));
+        guacamoleRecipe.addIngredient(new Ingredient("serrang chiles, stems and seeds removed, minced",new BigDecimal(2),eachUom));
+        guacamoleRecipe.addIngredient(new Ingredient("Cilantro",new BigDecimal(2),tableSpoonUom));
+        guacamoleRecipe.addIngredient(new Ingredient("freshly grated black pepper",new BigDecimal(2),dashUom));
+        guacamoleRecipe.addIngredient(new Ingredient("ripe tomato, seeds & pulp removed, chopped",new BigDecimal(5),eachUom));
 
         guacamoleRecipe.getCategories().add(americanCategory);
         guacamoleRecipe.getCategories().add(mexicanCategory);
@@ -172,14 +172,14 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
                 "First, I marinate the chicken briefly in a spicy paste of ancho chile powder, oregano, cumin, and sweet orange juice while the grill is heating. You can also use this time to prepare the taco toppings.\n" +
                 "\n" +
                 "Grill the chicken, then let it rest while you warm the tortillas. Now you are ready to assemble the tacos and dig in. The whole meal comes together in about 30 minutes!");
-
-        tacoNotes.setRecipe(tacoRecipe);
+        //not needed anymore added to setNotes-method in Recipe-class
+        //tacoNotes.setRecipe(tacoRecipe);
 
         tacoRecipe.setNotes(tacoNotes);
 
-        tacoRecipe.getIngredients().add(new Ingredient("Ancho Chili powder",new BigDecimal(2),tableSpoonUom,tacoRecipe));
-        tacoRecipe.getIngredients().add(new Ingredient("Dried Oregano",new BigDecimal(1),teaSpoonUom,tacoRecipe));
-        tacoRecipe.getIngredients().add(new Ingredient("Dried Cumin",new BigDecimal(2),teaSpoonUom,tacoRecipe));
+        tacoRecipe.addIngredient(new Ingredient("Ancho Chili powder",new BigDecimal(2),tableSpoonUom));
+        tacoRecipe.addIngredient(new Ingredient("Dried Oregano",new BigDecimal(1),teaSpoonUom));
+        tacoRecipe.addIngredient(new Ingredient("Dried Cumin",new BigDecimal(2),teaSpoonUom));
 
         tacoRecipe.getCategories().add(americanCategory);
         tacoRecipe.getCategories().add(mexicanCategory);
