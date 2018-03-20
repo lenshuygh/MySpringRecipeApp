@@ -16,8 +16,8 @@ public class Recipe {
     private String sources;
     private String url;
     private String directions;
-    //todo add
-    //private Difficulty difficulty
+
+
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
     private Set<Ingredient> ingredients;
@@ -27,6 +27,9 @@ public class Recipe {
 
     @OneToOne(cascade = CascadeType.ALL)
     private Notes notes;
+
+    @Enumerated(value = EnumType.STRING) //ordinal as type would assign 1,2 or 3 as value here, but when we add a new value to the enum this would could a problem
+    private Difficulty difficulty;
 
     public Long getId() {
         return id;
@@ -114,5 +117,13 @@ public class Recipe {
 
     public void setIngredients(Set<Ingredient> ingredients) {
         this.ingredients = ingredients;
+    }
+
+    public Difficulty getDifficulty() {
+        return difficulty;
+    }
+
+    public void setDifficulty(Difficulty difficulty) {
+        this.difficulty = difficulty;
     }
 }
