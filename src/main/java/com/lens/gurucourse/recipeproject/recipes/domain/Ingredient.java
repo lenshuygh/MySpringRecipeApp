@@ -1,12 +1,14 @@
 package com.lens.gurucourse.recipeproject.recipes.domain;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Objects;
 
 @Data
+@EqualsAndHashCode(exclude = {"recipe"})
 @Entity
 public class Ingredient {
     @Id
@@ -38,21 +40,5 @@ public class Ingredient {
         this.uom = uom;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
-        Ingredient that = (Ingredient) o;
-        return Objects.equals(id, that.id) &&
-                Objects.equals(description, that.description) &&
-                Objects.equals(amount, that.amount) &&
-                Objects.equals(uom, that.uom);
-    }
 
-    @Override
-    public int hashCode() {
-
-        return Objects.hash(super.hashCode(), id, description, amount, uom);
-    }
 }

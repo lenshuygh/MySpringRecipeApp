@@ -9,6 +9,7 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -29,15 +30,16 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
     }
 
     @Override
+    //@Transactional <- if there is a lazy loading related error
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
-        log.info("RecipeBootstrap > onApplicationEvent");
+        log.debug("Loading Bootstrap Data");
 
         recipeRepository.saveAll(getRecipes());
     }
 
     private List<Recipe> getRecipes(){
 
-        log.info("RecipeBootstrap > getRecipes()");
+        //log.info("RecipeBootstrap > getRecipes()");
 
         List<Recipe> recipes = new ArrayList<>(2);
 
