@@ -145,6 +145,10 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
         guacamoleRecipe.getCategories().add(americanCategory);
         guacamoleRecipe.getCategories().add(mexicanCategory);
 
+        guacamoleRecipe.setUrl("http://www.simplerecipes.com/guacamole/url");
+        guacamoleRecipe.setServings(4);
+        guacamoleRecipe.setSources("the internet");
+
         //add to return list
         recipes.add(guacamoleRecipe);
 
@@ -191,6 +195,10 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
 
         tacoRecipe.getCategories().add(americanCategory);
         tacoRecipe.getCategories().add(mexicanCategory);
+
+        tacoRecipe.setUrl("http://www.simplerecipes.com/chickaaan/url");
+        tacoRecipe.setServings(10);
+        tacoRecipe.setSources("the internet also");
 
         //add to list
         recipes.add(tacoRecipe);
