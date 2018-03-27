@@ -2,10 +2,12 @@ package com.lens.gurucourse.recipeproject.recipes.controllers;
 
 import com.lens.gurucourse.recipeproject.recipes.commands.RecipeCommand;
 import com.lens.gurucourse.recipeproject.recipes.services.RecipeService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+@Slf4j
 @Controller
 public class RecipeController {
 
@@ -15,6 +17,7 @@ public class RecipeController {
         this.recipeService = recipeService;
     }
 
+    @GetMapping // method can only be used for GET requests
     @RequestMapping("/recipe/{id}/show")
     public String showById(@PathVariable String id, Model model){
         model.addAttribute("recipe", recipeService.findById(new Long(id)));
@@ -22,6 +25,7 @@ public class RecipeController {
         return "recipe/show";
     }
 
+    @GetMapping
     @RequestMapping("recipe/new")
     public String newRecipe(Model model){
         model.addAttribute("recipe",new RecipeCommand());
@@ -33,7 +37,7 @@ public class RecipeController {
 
     //or newer =>
 
-    @PostMapping
+    @PostMapping // method can only be used for POST requests
     @RequestMapping("recipe")
     public String saveOrUpdate(@ModelAttribute RecipeCommand command){
         RecipeCommand savedCommand = recipeService.saveRecipeCommand(command);
@@ -41,10 +45,22 @@ public class RecipeController {
         return "redirect:/recipe/" + savedCommand.getId() + "/show";
     }
 
+    @GetMapping
     @RequestMapping("recipe/{id}/update")
     public String updateRecipe(@PathVariable String id, Model model){
         model.addAttribute("recipe",recipeService.findCommandById(new Long(id)));
 
         return "recipe/recipeform";
+    }
+
+    @GetMapping
+    @RequestMapping("recipe/{id}/delete")
+    public String deleteRecipeById(@PathVariable String id){
+
+        log.debug("deleting id : " + id);
+
+        recipeService.deleteById(Long.valueOf(id));
+
+        return "redirect:/";
     }
 }
