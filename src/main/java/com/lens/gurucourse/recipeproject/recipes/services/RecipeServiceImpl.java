@@ -55,4 +55,10 @@ public class RecipeServiceImpl implements RecipeService {
         log.debug("saved recipeId -> " + savedRecipe.getId());
         return recipeToRecipeCommand.convert(savedRecipe);
     }
+
+    @Override
+    @Transactional
+    public RecipeCommand findCommandById(Long id) {
+        return recipeToRecipeCommand.convert(findById(id));
+    }
 }
