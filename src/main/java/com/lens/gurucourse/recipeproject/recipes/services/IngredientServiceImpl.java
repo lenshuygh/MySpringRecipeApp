@@ -72,9 +72,6 @@ public class IngredientServiceImpl implements IngredientService {
                 Ingredient ingredientFound = ingredientOptional.get();
                 ingredientFound.setDescription(command.getDescription());
                 ingredientFound.setAmount(command.getAmount());
-                log.info("command -> " + command);
-                log.info("command.getUom -> " + command.getUom());
-                log.info("id from command.uom -> " + command.getUom().getId());
                 ingredientFound.setUom(unitOfMeasureRepository
                     .findById(command.getUom().getId())
                     .orElseThrow(() -> new RuntimeException("UOM NOT FOUND"))); //todo address this
