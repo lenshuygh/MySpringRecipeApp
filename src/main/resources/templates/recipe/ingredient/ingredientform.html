@@ -18,11 +18,11 @@
 
 </head>
 <body>
-<!--/*@thymesVar id="ingredient" type="ccom.lens.gurucourse.recipeproject.recipes.domain.Ingredient"*/-->
+<!--/*@thymesVar id="ingredient" type="com.lens.gurucourse.recipeproject.recipes.domain.Ingredient"*/-->
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
-            <form th:object="${ingredient}" th:action="@{'/recipe/' + ${ingredient.recipeId} + '/ingredient'}">
+            <form th:object="${ingredient}" th:action="@{'/recipe/' + ${ingredient.recipeId} + '/ingredient'}" method="post">
                 <input type="hidden" th:field="*{id}"/>
                 <div class="panel-group">
                     <div class="panel panel-primary">

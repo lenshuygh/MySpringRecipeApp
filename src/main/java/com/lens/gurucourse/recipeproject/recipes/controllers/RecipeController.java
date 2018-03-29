@@ -17,16 +17,14 @@ public class RecipeController {
         this.recipeService = recipeService;
     }
 
-    @GetMapping // method can only be used for GET requests
-    @RequestMapping("/recipe/{id}/show")
+    @GetMapping("/recipe/{id}/show")
     public String showById(@PathVariable String id, Model model){
         model.addAttribute("recipe", recipeService.findById(new Long(id)));
 
         return "recipe/show";
     }
 
-    @GetMapping
-    @RequestMapping("recipe/new")
+    @GetMapping("recipe/new")
     public String newRecipe(Model model){
         model.addAttribute("recipe",new RecipeCommand());
 
@@ -37,24 +35,21 @@ public class RecipeController {
 
     //or newer =>
 
-    @PostMapping // method can only be used for POST requests
-    @RequestMapping("recipe")
+    @PostMapping("recipe")
     public String saveOrUpdate(@ModelAttribute RecipeCommand command){
         RecipeCommand savedCommand = recipeService.saveRecipeCommand(command);
 
         return "redirect:/recipe/" + savedCommand.getId() + "/show";
     }
 
-    @GetMapping
-    @RequestMapping("recipe/{id}/update")
+    @GetMapping("recipe/{id}/update")
     public String updateRecipe(@PathVariable String id, Model model){
         model.addAttribute("recipe",recipeService.findCommandById(new Long(id)));
 
         return "recipe/recipeform";
     }
 
-    @GetMapping
-    @RequestMapping("recipe/{id}/delete")
+    @GetMapping("recipe/{id}/delete")
     public String deleteRecipeById(@PathVariable String id){
 
         log.debug("deleting id : " + id);
