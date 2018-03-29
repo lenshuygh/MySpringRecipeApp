@@ -1,6 +1,8 @@
 package com.lens.gurucourse.recipeproject.recipes.controllers;
 
 import com.lens.gurucourse.recipeproject.recipes.commands.IngredientCommand;
+import com.lens.gurucourse.recipeproject.recipes.commands.RecipeCommand;
+import com.lens.gurucourse.recipeproject.recipes.commands.UnitOfMeasureCommand;
 import com.lens.gurucourse.recipeproject.recipes.services.IngredientService;
 import com.lens.gurucourse.recipeproject.recipes.services.RecipeService;
 import com.lens.gurucourse.recipeproject.recipes.services.UnitOfMeasureService;
@@ -60,5 +62,26 @@ public class IngredientController {
         log.debug("saved ingredient id: " + savedCommand.getId());
 
         return "redirect:/recipe/" + savedCommand.getRecipeId() + "/ingredient/" + savedCommand.getId() + "/show";
+    }
+
+    @GetMapping
+    @RequestMapping("recipe/{recipeId}/ingredient/new")
+    public String newRecipe(@PathVariable String recipeId,Model model){
+        //make sure we have a good id value
+        RecipeCommand recipeCommand = recipeService.findCommandById(Long.valueOf(recipeId));
+        //todo raise exception if null
+
+        //need to return parent id for hidden form property
+        IngredientCommand ingredientCommand = new IngredientCommand();
+        ingredientCommand.setRecipeId(Long.valueOf(recipeId));
+        model.addAttribute("ingredient",ingredientCommand);
+
+        //init uom
+        ingredientCommand.setUom(new UnitOfMeasureCommand());
+
+        model.addAttribute("uomList",unitOfMeasureService.listAllUoms());
+
+        return "recipe/ingredient/ingredientform";
+
     }
 }
