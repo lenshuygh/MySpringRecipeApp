@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http;//www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Ingredient</title>
@@ -41,7 +41,7 @@
                             <tr>
                                 <td th:text="${ingredient.id}">456</td>
                                 <td th:text="${ingredient.amount}+' '+
-                                ${ingredient.unitOfMeasure.description}+' '+
+                                ${ingredient.uom.description}+' '+
                                 ${ingredient.description}">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor, facere.</td>
                             </tr>
                         </table>
