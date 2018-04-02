@@ -54,6 +54,7 @@ public class RecipeControllerTest {
                 .andExpect(view().name("recipe/show"))
                 .andExpect(model().attributeExists("recipe"));
     }
+/*
 
     @Test
     public void testGetRecipe_NotFound() throws Exception{
@@ -65,6 +66,7 @@ public class RecipeControllerTest {
         mockMvc.perform(get("/recipe/1/show"))
                 .andExpect(status().isNotFound());
     }
+*/
 
     @Test
     public void testGetNewRecipeForm() throws Exception{
@@ -112,6 +114,15 @@ public class RecipeControllerTest {
                 .andExpect(view().name("redirect:/"));
 
         verify(recipeService,times(1)).deleteById(anyLong());
+    }
+
+    @Test
+    public void testGetRecipe_NotFound() throws Exception{
+        when(recipeService.findById(anyLong())).thenThrow(NotFoundException.class);
+
+        mockMvc.perform(get("/recipe/1/show"))
+                .andExpect(status().isNotFound())
+                .andExpect(view().name("404error"));
     }
 
 }
