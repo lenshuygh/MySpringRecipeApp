@@ -3,6 +3,7 @@ package com.lens.gurucourse.recipeproject.recipes.services;
 import com.lens.gurucourse.recipeproject.recipes.converters.RecipeCommandToRecipe;
 import com.lens.gurucourse.recipeproject.recipes.converters.RecipeToRecipeCommand;
 import com.lens.gurucourse.recipeproject.recipes.domain.Recipe;
+import com.lens.gurucourse.recipeproject.recipes.exceptions.NotFoundException;
 import com.lens.gurucourse.recipeproject.recipes.repositories.RecipeRepository;
 import org.junit.Before;
 import org.junit.Test;
@@ -50,6 +51,17 @@ public class RecipeServiceImplTest {
         assertNotNull("Null recipe returned",recipeReturned);
         verify(recipeRepository, times(1)).findById(anyLong());
         verify(recipeRepository, never()).findAll();
+    }
+
+    @Test(expected = NotFoundException.class)
+    public void getRecipeByIdTest_NotFound() throws Exception{
+        Optional<Recipe> recipeOptional = Optional.empty();
+
+        when(recipeRepository.findById(anyLong())).thenReturn(recipeOptional);
+
+        Recipe recipeReturned = recipeService.findById(1L);
+
+        //this should fail
     }
 
     @Test

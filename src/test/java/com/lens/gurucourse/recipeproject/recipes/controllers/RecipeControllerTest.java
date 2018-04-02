@@ -2,6 +2,7 @@ package com.lens.gurucourse.recipeproject.recipes.controllers;
 
 import com.lens.gurucourse.recipeproject.recipes.commands.RecipeCommand;
 import com.lens.gurucourse.recipeproject.recipes.domain.Recipe;
+import com.lens.gurucourse.recipeproject.recipes.exceptions.NotFoundException;
 import com.lens.gurucourse.recipeproject.recipes.services.RecipeService;
 import org.junit.Before;
 import org.junit.Test;
@@ -52,6 +53,17 @@ public class RecipeControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(view().name("recipe/show"))
                 .andExpect(model().attributeExists("recipe"));
+    }
+
+    @Test
+    public void testGetRecipe_NotFound() throws Exception{
+        Recipe recipe = new Recipe();
+        recipe.setId(1L);
+
+        when(recipeService.findById(anyLong())).thenThrow(NotFoundException.class);
+
+        mockMvc.perform(get("/recipe/1/show"))
+                .andExpect(status().isNotFound());
     }
 
     @Test
