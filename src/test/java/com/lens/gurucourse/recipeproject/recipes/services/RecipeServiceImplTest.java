@@ -1,5 +1,6 @@
 package com.lens.gurucourse.recipeproject.recipes.services;
 
+import com.lens.gurucourse.recipeproject.recipes.commands.RecipeCommand;
 import com.lens.gurucourse.recipeproject.recipes.converters.RecipeCommandToRecipe;
 import com.lens.gurucourse.recipeproject.recipes.converters.RecipeToRecipeCommand;
 import com.lens.gurucourse.recipeproject.recipes.domain.Recipe;
@@ -92,5 +93,25 @@ public class RecipeServiceImplTest {
         //then
         //verify that recipeRepository gets called ONE time and that the deleteById gets invoked :
         verify(recipeRepository,times(1)).deleteById(anyLong());
+    }
+
+    @Test
+    public void getRecipeCommandByIdTest() throws Exception {
+        Recipe recipe = new Recipe();
+        recipe.setId(1L);
+        Optional<Recipe> recipeOptional = Optional.of(recipe);
+
+        when(recipeRepository.findById(anyLong())).thenReturn(recipeOptional);
+
+        RecipeCommand recipeCommand = new RecipeCommand();
+        recipeCommand.setId(1L);
+
+        when(recipeToRecipeCommand.convert(any())).thenReturn(recipeCommand);
+
+        RecipeCommand commandById = recipeService.findCommandById(1L);
+
+        assertNotNull("Null recipe returned", commandById);
+        verify(recipeRepository, times(1)).findById(anyLong());
+        verify(recipeRepository, never()).findAll();
     }
 }
