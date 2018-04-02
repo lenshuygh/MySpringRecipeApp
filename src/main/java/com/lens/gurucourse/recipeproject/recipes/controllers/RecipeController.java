@@ -58,7 +58,6 @@ public class RecipeController {
         log.debug("deleting id : " + id);
 
         recipeService.deleteById(Long.valueOf(id));
-
         return "redirect:/";
     }
 
@@ -75,4 +74,19 @@ public class RecipeController {
 
         return modelAndView;
     }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(NumberFormatException.class)
+    public ModelAndView handleNumberformatException(Exception exception){
+        log.error("NumberFormatException occured");
+        log.error(exception.getMessage());
+
+        ModelAndView modelAndView = new ModelAndView();
+
+        modelAndView.setViewName("400error");
+        modelAndView.addObject("exception",exception);
+
+        return modelAndView;
+    }
 }
+
