@@ -41,7 +41,7 @@ jobs:
       - run: mvn integration-test cobertura:cobertura
 
       - store_test_results:
-          path: taget/surefire-reports
+          path: tagret/surefire-reports
 
       - run:
         name: Send to CodeCov.io
