@@ -1,0 +1,1 @@
+[![CircleCI](https://circleci.com/gh/lenshuygh/MySpringRecipeApp.svg?style=svg)](https://circleci.com/gh/lenshuygh/MySpringRecipeApp)
